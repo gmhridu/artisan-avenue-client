@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import './NewProduct.css';
-
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import "./NewProduct.css";
+import NewProductsSlider from "../newProductsSlider/NewProductsSlider";
 
 const NewProducts = () => {
-   const [activeButton, setActiveButton] = useState('');
+  const [activeButton, setActiveButton] = useState("");
 
   const handleButtonClick = (buttonClass) => {
     setActiveButton(buttonClass);
@@ -16,7 +16,7 @@ const NewProducts = () => {
           <h1 className="text-center pt-3 text-4xl font-medium">
             New <span className="border-b-2 pb-6">Prod</span>ucts
           </h1>
-          <div className="flex gap-20 items-center justify-center uppercase my-16 text-xl font-medium">
+          <div className="flex gap-3 md:gap-20 items-center justify-center uppercase my-16 text-xl font-medium">
             <button
               onClick={() => handleButtonClick("featured")}
               className={`button ${
@@ -49,6 +49,7 @@ const NewProducts = () => {
             </button>
           </div>
         </div>
+        <NewProductsSlider/>
       </div>
     </div>
   );
