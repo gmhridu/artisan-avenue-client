@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,21 +8,4 @@
   margin:0 20px;
   overflow:"hidden";
   padding:2rem 0;
-}
-
-.slider img {
-  width: 100%;
-  border-radius:10px;
-}
-
-.react-multi-carousel-list {
-padding: 0rem 0 2rem 0;
-}
-
-.custom-dot-list-style button{
-border: none;
-background: rgb(255, 68, 68);
-}
-.react-multi-carousel-dot.react-multi-carousel-dot--active button{
-background: rgb(255, 68, 68) !important;
 }

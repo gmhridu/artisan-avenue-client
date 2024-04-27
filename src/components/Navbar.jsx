@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaHouseUser, FaRegUser } from "react-icons/fa";
+
 import { Link, NavLink } from "react-router-dom";
 import loginAnim from "../assets/login-anim.gif";
-import userProfile from "../assets/user-profile.gif";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");

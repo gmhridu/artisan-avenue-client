@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        pops: '"Poppins", sans-serif',
+        pops: '"Work Sans", sans-serif',
       },
     },
   },
