@@ -210,7 +210,7 @@ const Navbar = () => {
                   tabIndex={0}
                   className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                 >
-                  <div className="px-4 py-3">
+                  <div className="px-4 py-3 border-b">
                     <span className="block text-sm text-gray-900 dark:text-white">
                       Bonnie Green
                     </span>
@@ -219,7 +219,7 @@ const Navbar = () => {
                     </span>
                   </div>
                   <li>
-                    <a className="justify-between">
+                    <a className="justify-between pt-2">
                       Profile
                       <span className="badge">New</span>
                     </a>
