@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   'node_modules/flowbite-react/lib/esm/**/*.js',],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pops: '"Poppins", sans-serif',
+      },
+    },
   },
   daisyui: {
     themes:["light", "night"],
