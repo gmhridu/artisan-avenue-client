@@ -7,6 +7,7 @@ import LatestCollection from '../../components/LatestCollections/LatestCollectio
 import FeaturedProduct from '../../components/FeaturedProduct/FeaturedProduct';
 import OurCategory from '../../components/OurCategory/OurCategory';
 import FreeShipping from '../../components/FreeShipping/FreeShipping';
+import CustomersReview from '../../components/CustomersReview/CustomersReview';
 
 const Home = () => {
   return (
@@ -19,7 +20,8 @@ const Home = () => {
       <LatestCollection />
       <FeaturedProduct />
       <OurCategory />
-      <FreeShipping/>
+      <FreeShipping />
+      <CustomersReview/>
     </div>
   );
 };

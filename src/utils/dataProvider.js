@@ -93,6 +93,33 @@ export const categoryImg = [
     title: "Garden"
   }
 ]
+
+export const reviewMessage = [
+  {
+    review: "Absolutely stunning designs! Sarah's attention to detail and creativity are unmatched. Every piece I've purchased has added a touch of elegance to my space.",
+    name: "Emily Thompson",
+    position: "Designer"
+
+  },
+  {
+    review: "Max's designs are a true work of art! His unique style and use of color bring life and energy to any room. I'm always impressed by his talent and dedication to his craft.",
+    name: "Jason Lee",
+    position: "Designer"
+
+  },
+  {
+    review: "Lucy's creations are simply breathtaking! Her ability to capture emotion and beauty in her designs is truly remarkable. I'm constantly inspired by her work.",
+    name: "Olivia Roberts",
+    position: "Designer"
+
+  },
+]
+
+export const marqueeImg = [
+  {
+    url: "https://i.postimg.cc/66Fw4TB6/menufacture-1.png",
+  }
+]
  
 
 
