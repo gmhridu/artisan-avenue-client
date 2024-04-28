@@ -18,12 +18,15 @@ const Home = () => {
         <WhoWeAre />
       </div>
       <NewProducts />
+      <div className="my-1 container mx-auto">
+        <NewProductsSlider />
+      </div>
       <LatestCollection />
       <FeaturedProduct />
       <OurCategory />
       <FreeShipping />
       <CustomersReview />
-      <MarqueeImg/>
+      <MarqueeImg />
     </div>
   );
 };

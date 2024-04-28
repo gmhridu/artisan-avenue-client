@@ -10,7 +10,7 @@ const NewProducts = () => {
     setActiveButton(buttonClass);
   };
   return (
-    <div className="my-6 container mx-auto">
+    <div className="mt-6 container mx-auto">
       <div>
         <div>
           <h1 className="text-center pt-3 text-4xl font-medium">
@@ -49,7 +49,7 @@ const NewProducts = () => {
             </button>
           </div>
         </div>
-        <NewProductsSlider/>
+       
       </div>
     </div>
   );

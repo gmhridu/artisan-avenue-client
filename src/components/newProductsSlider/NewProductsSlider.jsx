@@ -4,7 +4,7 @@ import { MdMaximize } from "react-icons/md";
 import "./newProductSlider.css";
 import { newProductImg, hoveProducts } from "../../utils/dataProvider";
 import "react-multi-carousel/lib/styles.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
 import { FaCartArrowDown, FaRegEye } from "react-icons/fa";
 
 const responsive = {
@@ -26,17 +26,26 @@ const responsive = {
 };
 
 const NewProductsSlider = () => {
+  const newCraft = useLoaderData()
+  console.log(newCraft)
+  const { rating, name, price, description, category, image, hoveredImg } =
+    newCraft;
   const [hoveredImages, setHoveredImages] = useState(
-    new Array(newProductImg.length).fill(false)
+    new Array(newCraft?.length).fill(false)
   );
 
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (e, index) => {
+    e.preventDefault();
+    console.log(index)
     const updatedHoveredImages = [...hoveredImages];
     updatedHoveredImages[index] = true;
     setHoveredImages(updatedHoveredImages);
+    console.log(newCraft[index]?.hoveredImg);
   };
 
-  const handleMouseLeave = (index) => {
+  
+  const handleMouseLeave = (e, index) => {
+    e.preventDefault();
     const updatedHoveredImages = [...hoveredImages];
     updatedHoveredImages[index] = false;
     setHoveredImages(updatedHoveredImages);
@@ -63,33 +72,30 @@ const NewProductsSlider = () => {
         itemClass="carousel-item-padding-40-px"
         containerClass="carousel-container"
       >
-        {newProductImg?.map((imageUrl, index) => (
-          <div
-            className="slider relative"
-            key={index}
-            onMouseOver={() => handleMouseEnter(index)}
-            onMouseOut={() => handleMouseLeave(index)}
-          >
-            <img
-              className={`rounded-xl w-full bg-white p-2 border-2 md:p-4 md:border-[15px] border-[#121212] transition-all duration-300 ${
-                hoveredImages[index] ? "transform scale-105" : ""
-              }`}
-              src={
-                hoveredImages[index] ? hoveProducts[index]?.url : imageUrl?.url
-              }
-              alt="pic"
-            />
-            <div className="my-5">
-              <h1 className="text-lg">Product Name</h1>
-              <p>Price</p>
+        {newCraft?.map((craft, index) => (
+          <div className="slider relative" key={craft?._id}>
+            <div
+              className="h-[600px] w-[450px]"
+              onMouseOver={(e) => handleMouseEnter(e, index)}
+              onMouseOut={(e) => handleMouseLeave(e, index)}
+            >
+              <img
+                className={`rounded-xl w-full h-full object-cover bg-white p-2 border-2 md:p-4 md:border-[15px] border-[#121212] transition-all duration-300
+              `}
+                src={hoveredImages[index] ? craft?.hoveredImg : craft?.image}
+                alt="pic"
+              />
             </div>
-            {hoveredImages[index] && (
+            <div className="my-5">
+              <h1 className="text-lg">{craft?.name}</h1>
+              <p>$ {craft?.price}</p>
+            </div>
+            {newCraft[index]?.hoveredImg && (
               <>
                 <div
                   className="absolute  flex flex-col 
-              gap-3 bottom-48 right-9"
+              gap-3 bottom-48 right-16 z-20"
                 >
-                  {/* Your buttons here */}
                   <NavLink
                     to={"/singleProduct"}
                     className="text-black p-2 bg-white rounded-xl"
@@ -103,7 +109,7 @@ const NewProductsSlider = () => {
                     <FaCartArrowDown className="text-3xl" />
                   </NavLink>
                 </div>
-                <div className="absolute top-10 right-2 bg-green-500 p-2">
+                <div className="absolute top-[4.1rem] right-14 bg-green-500 p-2 rounded-lg">
                   <div className="rating">
                     <h3 className="text-lg text-white mr-2">5</h3>
                     <input
