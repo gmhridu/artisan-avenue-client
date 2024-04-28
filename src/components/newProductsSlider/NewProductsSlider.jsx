@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import { MdMaximize } from "react-icons/md";
 import "./newProductSlider.css";
 import { newProductImg, hoveProducts } from "../../utils/dataProvider";
+import "react-multi-carousel/lib/styles.css";
 import { NavLink } from "react-router-dom";
 import { FaCartArrowDown, FaRegEye } from "react-icons/fa";
 

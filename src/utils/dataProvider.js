@@ -67,6 +67,32 @@ export const hoveProducts = [
   }
 ]
 
+export const categoryImg = [
+  {
+    url: "https://i.postimg.cc/k44Wsg8j/category3.jpg",
+    title: "Shop All"
+  },
+  {
+    url: "https://i.postimg.cc/0QBDB109/category2.jpg",
+    title: "Kitchen"
+  },
+  {
+    url: "https://i.postimg.cc/zGZSN5ZB/category4.jpg",
+    title: "Publications"
+  },
+  {
+    url: "https://i.postimg.cc/k44Wsg8j/category3.jpg",
+    title: "Bath"
+  },
+  {
+    url: "https://i.postimg.cc/wjX5TPgk/category5.jpg",
+    title: "Utility"
+  },
+  {
+    url: "https://i.postimg.cc/d0n8Gy7k/category6.jpg",
+    title: "Garden"
+  }
+]
  
 
 
