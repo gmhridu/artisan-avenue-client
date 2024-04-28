@@ -8,6 +8,7 @@ import FeaturedProduct from '../../components/FeaturedProduct/FeaturedProduct';
 import OurCategory from '../../components/OurCategory/OurCategory';
 import FreeShipping from '../../components/FreeShipping/FreeShipping';
 import CustomersReview from '../../components/CustomersReview/CustomersReview';
+import MarqueeImg from '../../components/MarqueeImg/MarqueeImg';
 
 const Home = () => {
   return (
@@ -21,7 +22,8 @@ const Home = () => {
       <FeaturedProduct />
       <OurCategory />
       <FreeShipping />
-      <CustomersReview/>
+      <CustomersReview />
+      <MarqueeImg/>
     </div>
   );
 };

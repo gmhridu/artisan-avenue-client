@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Link, NavLink } from "react-router-dom";
 import loginAnim from "../assets/login-anim.gif";
+import uploadIcon from "../assets/uploadIcon.gif";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
@@ -148,6 +149,17 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end flex gap-5">
+          <Link
+            to={"/uploadProduct"}
+            className="hidden md:block border border-yellow-300 px-3 rounded-xl hover:bg-gray-200"
+          >
+            <button className="flex bg-transparent items-center text-lg gap-2 font-semibold px-2 py-2">
+              <span>
+                <img src={uploadIcon} className="h-6" alt="" />
+              </span>
+              Add Craft Item
+            </button>
+          </Link>
           <fieldset className="hidden md:block space-y-1 dark:text-gray-800">
             <label htmlFor="Search" className="hidden">
               Search

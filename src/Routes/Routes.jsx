@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
 import Home from "../pages/Home/Home";
 import SingleProduct from "../components/SingleProduct/SingleProduct";
+import UploadProduct from "../pages/UploadProduct/UploadProduct";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/singleProduct",
         element: <SingleProduct/>,
+      },
+      {
+        path: "/uploadProduct",
+        element: <UploadProduct/>,
       }
     ]
   }

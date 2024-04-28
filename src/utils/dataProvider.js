@@ -118,6 +118,33 @@ export const reviewMessage = [
 export const marqueeImg = [
   {
     url: "https://i.postimg.cc/66Fw4TB6/menufacture-1.png",
+  },
+  {
+    url: "https://i.postimg.cc/yNfC18fH/menufacture-2.png",
+  },
+  {
+    url: "https://i.postimg.cc/8CkVg6m4/menufacture-3.png",
+  },
+  {
+    url: "https://i.postimg.cc/ryR2TcxB/menufacture-4.png",
+  },
+  {
+    url: "https://i.postimg.cc/QtHGHZPW/menufacture-5.png",
+  },
+  {
+    url: "https://i.postimg.cc/vZssXj1p/menufacture-6.png",
+  },
+  {
+    url: "https://i.postimg.cc/NMShXPqC/menufacture-7.png",
+  },
+  {
+    url: "https://i.postimg.cc/13rZdHw4/menufacture-8.png",
+  },
+  {
+    url: "https://i.postimg.cc/yxZMyX71/menufacture-9.png",
+  },
+  {
+    url: "https://i.postimg.cc/CLD0GYKG/menufacture-10.png",
   }
 ]
  
