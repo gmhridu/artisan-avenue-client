@@ -3,6 +3,7 @@ import Root from "../layouts/Root";
 import Home from "../pages/Home/Home";
 import SingleProduct from "../components/SingleProduct/SingleProduct";
 import UploadProduct from "../pages/UploadProduct/UploadProduct";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element:<Home/>,
+        element: <Home />,
+        loader: async () => {
+          try {
+            const response = await axios.get("http://localhost:5000/products");
+            const data = response.data;
+            return data;
+          } catch (error) {
+            console.error("Error fetching products:", error);
+            return [];
+          }
+        },
       },
       {
         path: "/about",
@@ -31,14 +42,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/singleProduct",
-        element: <SingleProduct/>,
+        element: <SingleProduct />,
       },
       {
         path: "/uploadProduct",
-        element: <UploadProduct/>,
-      }
-    ]
-  }
-])
+        element: <UploadProduct />,
+      },
+    ],
+  },
+]);
 
 export default router;

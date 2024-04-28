@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -7,6 +7,7 @@ const UploadProduct = () => {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -31,13 +32,16 @@ const UploadProduct = () => {
     const category = selectedCategory;
     const description = formData.description.value;
     const image = formData.image.value;
+    const hoveredImg = formData.hovered.value;
 
     const newProduct = {
       name,
       price,
       description,
       category,
+      rating,
       image,
+      hoveredImg,
     };
 
     axios
@@ -105,6 +109,7 @@ const UploadProduct = () => {
                   required=""
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="category"
@@ -125,6 +130,26 @@ const UploadProduct = () => {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="rating"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Rating
+                </label>
+                <input
+                  type="number"
+                  name="rating"
+                  id="rating"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Enter rating"
+                  required=""
+                  min="0"
+                  max="5"
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
+                />
               </div>
               <div className="sm:col-span-2">
                 <label
@@ -152,6 +177,22 @@ const UploadProduct = () => {
                   type="text"
                   name="image"
                   id="image"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Enter photo URL"
+                  required
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="hovered"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Hovered Photo URL (Optional)
+                </label>
+                <input
+                  type="text"
+                  name="hovered"
+                  id="hovered"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Enter photo URL"
                 />
