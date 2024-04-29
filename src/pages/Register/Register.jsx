@@ -1,24 +1,59 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// Register.js
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../utils/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const handleRegister = (e) => {
-    e.preventDefault();
+ const [showPassword, setPassword] = useState(false);
+ const [showConfirmPassword, setConfirmPassword] = useState(false);
+ const { setUser, createUserAccount } = useContext(AuthContext);
+ const navigate = useNavigate();
 
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
+ const handleRegister = async (e) => {
+   e.preventDefault();
 
-    const newUser = {
-      name,
-      email,
-      password,
-      confirmPassword,
-    };
+   const name = e.target.name.value;
+   const email = e.target.email.value;
+   const password = e.target.password.value;
+   const image = e.target.image.value;
+   const confirmPassword = e.target.confirmPassword.value;
 
-    console.log(newUser);
-  };
+   const newUser = {
+     name,
+     email,
+     password,
+     confirmPassword,
+     image,
+   };
+
+   console.log("New User Data:", newUser);
+
+   try {
+     const data = await createUserAccount(newUser);
+
+     const user = data.user;
+    
+
+     if (user) {
+       setUser(newUser);
+       Swal.fire({
+         title: "Success!",
+         text: "Account Created Successfully",
+         icon: "success",
+       });
+       navigate("/signIn");
+     }
+   } catch (error) {
+     console.error("Error creating account:", error);
+     Swal.fire({
+       title: "Error!",
+       text: "Failed to create account",
+       icon: "error",
+     });
+   }
+ };
+
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 my-8 py-3">
@@ -37,7 +72,7 @@ const Register = () => {
                   Your Name
                 </label>
                 <input
-                  type="text" 
+                  type="text"
                   name="name"
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -47,7 +82,7 @@ const Register = () => {
               </div>
               <div>
                 <label
-                  htmlFor="email" // Changed 'for' to 'htmlFor'
+                  htmlFor="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your email
@@ -63,7 +98,23 @@ const Register = () => {
               </div>
               <div>
                 <label
-                  htmlFor="password" 
+                  htmlFor="image"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Photo URL
+                </label>
+                <input
+                  type="text"
+                  name="image"
+                  id="image"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Upload your image here"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Password
@@ -79,13 +130,13 @@ const Register = () => {
               </div>
               <div>
                 <label
-                  htmlFor="confirmPassword" 
+                  htmlFor="confirmPassword"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Confirm password
                 </label>
                 <input
-                  type="password" 
+                  type="password"
                   name="confirmPassword"
                   id="confirmPassword"
                   placeholder="••••••••"
@@ -105,7 +156,7 @@ const Register = () => {
                 </div>
                 <div className="ml-3 text-sm">
                   <label
-                    htmlFor="terms" 
+                    htmlFor="terms"
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
                     I accept the{" "}
@@ -130,7 +181,7 @@ const Register = () => {
               >
                 Already have an account?{" "}
                 <Link
-                to={'/signIn'}
+                  to={"/signIn"}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Login here
