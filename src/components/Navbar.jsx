@@ -14,7 +14,6 @@ const Navbar = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate()
 
-console.log(userData)
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -24,10 +23,9 @@ console.log(userData)
 
   useEffect(() => {
     if (user) {
-      console.log(user);
       fetchUserData(user?.uid);
     } else {
-      console.error("User not found");
+      console.error("Error fetching user data");
     }
   }, [user]);
 
@@ -52,25 +50,26 @@ console.log(userData)
   };
 
   // logOut
-  const handleLogOut =  () => {
+  const handleLogOut = () => {
+    setLoading(true); 
     logOut()
       .then(() => {
-        setLoading(true);
         Swal.fire({
           title: "Success!",
-          text: "Log Out Successfully",
+          text: "Logged out successfully",
           icon: "success",
+        }).then(() => {
+          navigate("/signIn");
         });
-        navigate("/signIn");
-      }).catch(() => {
-      Swal.fire({
-        title: "Error!",
-        text: "Failed to Log Out",
-        icon: "error",
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to log out",
+          icon: "error",
+        });
       });
-    })
-  }
-
+  };
   return (
     <div className="my-2 mx-auto px-2">
       <div className="navbar bg-base-100">
@@ -310,7 +309,7 @@ console.log(userData)
                       <a>Settings</a>
                     </li>
                     <li>
-                      <Link>Logout</Link>
+                      <Link onClick={handleLogOut}>Logout</Link>
                     </li>
                   </ul>
                 )}
