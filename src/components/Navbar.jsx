@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Link, NavLink } from "react-router-dom";
 import loginAnim from "../assets/login-anim.gif";
 import uploadIcon from "../assets/uploadIcon.gif";
+import { AuthContext } from "../utils/AuthProvider";
 
 const Navbar = () => {
+  const {user} = useContext(AuthContext);
   const [theme, setTheme] = useState("light");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -13,6 +15,14 @@ const Navbar = () => {
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+
+  useEffect(() => {
+    if (user) {
+      console.log(user)
+    } else {
+      console.error("user not found")
+    }
+  },[])
 
   const handleToggle = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "night" : "light"));

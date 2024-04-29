@@ -1,6 +1,6 @@
 
-import React, { createContext, useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import auth from "../components/Firebase/firebase.config";
 import axios from "axios";
 
@@ -16,8 +16,8 @@ const AuthProvider = ({ children }) => {
       await axios.post("http://localhost:5000/users", userData);
       const authResponse = await createUserWithEmailAndPassword(
         auth,
-        userData.email,
-        userData.password
+        userData?.email,
+        userData?.password
       );
       setUser(authResponse.user);
       setLoading(false);
@@ -29,12 +29,48 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const signInUser = async (email, password) => {
+    setLoading(true);
+    try {
+      const authResponse = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setUser(authResponse?.user);
+      setLoading(false);
+      return authResponse;
+    } catch (error) {
+      console.error("Error signing in user:", error);
+      setLoading(false);
+      throw error;
+    }
+  }
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  }
+
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser) {
+      setUser(currentUser);
+    } else {
+      setUser(null);
+    }
+    })
+    return () => unSubscribe();
+},[])
+
   const authInfo = {
     user,
     setUser,
     loading,
     setLoading,
     createUserAccount,
+    signInUser,
+    logOut,
   };
 
   return (

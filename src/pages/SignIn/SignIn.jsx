@@ -1,8 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../utils/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
-  const handleLoginSubmit = (e) => {
+  const [showPassword, setShowPassword] = useState(false)
+  const { setUser, signInUser } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+
+  const handleLoginSubmit = async(e) => {
     e.preventDefault();
 
     const loginForm = e.target;
@@ -17,6 +24,26 @@ const SignIn = () => {
     };
 
     console.log(loginData);
+
+    try {
+      const data = await signInUser(email, password);
+      const user = data?.user;
+      if (user) {
+        Swal.fire({
+          title: "Success!",
+          text: "Sign in Successfully",
+          icon: "success",
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to sign in",
+        icon: "error",
+      });
+    }
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -70,6 +97,7 @@ const SignIn = () => {
                       name="remember"
                       aria-describedby="remember"
                       type="checkbox"
+                      defaultChecked={false}
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                       required=""
                     />

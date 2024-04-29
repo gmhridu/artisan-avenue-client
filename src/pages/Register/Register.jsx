@@ -43,6 +43,7 @@ const Register = () => {
          icon: "success",
        });
        navigate("/signIn");
+       setUser("")
      }
    } catch (error) {
      console.error("Error creating account:", error);
