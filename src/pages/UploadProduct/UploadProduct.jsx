@@ -48,8 +48,8 @@ const UploadProduct = () => {
       .post("http://localhost:5000/products", newProduct)
       .then((response) => {
         console.log(response);
-        const data = response.data;
-        if (data._id) {
+        const data = response?.data;
+        if (data?._id) {
           Swal.fire({
             title: "Success!",
             text: "Product Added Successfully",

@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home";
 import SingleProduct from "../components/SingleProduct/SingleProduct";
 import UploadProduct from "../pages/UploadProduct/UploadProduct";
 import axios from "axios";
+import SignIn from "../pages/SignIn/SignIn";
+import Register from "../pages/Register/Register";
 
 
 const router = createBrowserRouter([
@@ -38,10 +40,6 @@ const router = createBrowserRouter([
         element: <h1>Contact</h1>,
       },
       {
-        path: "/signIn",
-        element: <h1>SignIn</h1>,
-      },
-      {
         path: "/singleProduct/:id",
         element: <SingleProduct />,
         loader: async ({ params }) => {
@@ -61,6 +59,14 @@ const router = createBrowserRouter([
         path: "/uploadProduct",
         element: <UploadProduct />,
       },
+     {
+        path: "/signIn",
+        element: <SignIn/>,
+      },
+      {
+        path: '/signup',
+        element: <Register/>,
+     }
     ],
   },
 ]);
