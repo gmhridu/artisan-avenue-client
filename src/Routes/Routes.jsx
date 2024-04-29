@@ -5,6 +5,7 @@ import SingleProduct from "../components/SingleProduct/SingleProduct";
 import UploadProduct from "../pages/UploadProduct/UploadProduct";
 import axios from "axios";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,8 +42,20 @@ const router = createBrowserRouter([
         element: <h1>SignIn</h1>,
       },
       {
-        path: "/singleProduct",
+        path: "/singleProduct/:id",
         element: <SingleProduct />,
+        loader: async ({ params }) => {
+          try {
+            const response = await axios.get(
+              `http://localhost:5000/products/${params.id}`
+            );
+            const data = response.data;
+            return data;
+          } catch (error) {
+            console.error("Error fetching product:", error);
+            return null;
+          }
+        },
       },
       {
         path: "/uploadProduct",
@@ -51,5 +64,4 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 export default router;

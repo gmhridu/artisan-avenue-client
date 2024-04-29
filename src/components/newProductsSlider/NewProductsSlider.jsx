@@ -4,7 +4,7 @@ import { MdMaximize } from "react-icons/md";
 import "./newProductSlider.css";
 import { newProductImg, hoveProducts } from "../../utils/dataProvider";
 import "react-multi-carousel/lib/styles.css";
-import { NavLink, useLoaderData } from "react-router-dom";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 import { FaCartArrowDown, FaRegEye } from "react-icons/fa";
 
 const responsive = {
@@ -28,7 +28,7 @@ const responsive = {
 const NewProductsSlider = () => {
   const newCraft = useLoaderData()
   console.log(newCraft)
-  const { rating, name, price, description, category, image, hoveredImg } =
+  const { rating, name, price, description, category, image, hoveredImg, _id } =
     newCraft;
   const [hoveredImages, setHoveredImages] = useState(
     new Array(newCraft?.length).fill(false)
@@ -73,7 +73,11 @@ const NewProductsSlider = () => {
         containerClass="carousel-container"
       >
         {newCraft?.map((craft, index) => (
-          <div className="slider relative" key={craft?._id}>
+          <Link
+            to={`singleProduct/${craft?._id}`}
+            className="slider relative"
+            key={craft?._id}
+          >
             <div
               className="h-[600px] w-[450px]"
               onMouseOver={(e) => handleMouseEnter(e, index)}
@@ -97,13 +101,13 @@ const NewProductsSlider = () => {
               gap-3 bottom-48 right-16 z-20"
                 >
                   <NavLink
-                    to={"/singleProduct"}
+                    to={`singleProduct/${craft?._id}`}
                     className="text-black p-2 bg-white rounded-xl"
                   >
                     <FaRegEye className="text-3xl" />
                   </NavLink>
                   <NavLink
-                    to={"/singleProduct"}
+                    to={`singleProduct/${craft?._id}`}
                     className="text-black p-2 bg-white rounded-xl"
                   >
                     <FaCartArrowDown className="text-3xl" />
@@ -111,7 +115,7 @@ const NewProductsSlider = () => {
                 </div>
                 <div className="absolute top-[4.1rem] right-14 bg-green-500 p-2 rounded-lg">
                   <div className="rating">
-                    <h3 className="text-lg text-white mr-2">5</h3>
+                    <h3 className="text-lg text-white mr-2">{craft?.rating}</h3>
                     <input
                       type="radio"
                       name="rating-4"
@@ -142,7 +146,7 @@ const NewProductsSlider = () => {
                 </div>
               </>
             )}
-          </div>
+          </Link>
         ))}
       </Carousel>
     </div>
