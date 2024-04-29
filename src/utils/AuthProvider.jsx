@@ -49,7 +49,15 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
-    return signOut(auth);
+    try {
+      signOut(auth);
+      setUser(null);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error signing out user:", error);
+      setLoading(false);
+      throw error;
+    }
   }
 
   useEffect(() => {
