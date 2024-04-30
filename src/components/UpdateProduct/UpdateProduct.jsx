@@ -1,6 +1,7 @@
 // import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
+
 // import axios from "axios";
+
 
 // const UpdateProduct = ({ location }) => {
 //   const { state: { product } = {} } = location;
@@ -13,7 +14,8 @@
 //     hoveredImg: product.hoveredImg || "",
 //   });
 
-//   const history = useHistory();
+
+
 
 //   const handleUpdate = async () => {
 //     try {
@@ -23,7 +25,7 @@
 //       );
 //       console.log("Product updated successfully:", response.data);
    
-//       history.push("/myList");
+      
 //     } catch (error) {
 //       console.error("Error updating product:", error);
 
