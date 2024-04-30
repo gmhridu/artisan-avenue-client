@@ -10,6 +10,7 @@ import About from "../pages/About/About";
 import MyList from "../pages/MyList/MyList";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import UpdateProfile from "../components/UpdateProfile/UpdateProfile";
+import UpdateProduct from "../components/UpdateProduct/UpdateProduct";
 
 
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/updateProfile",
         element: <UpdateProfile/>,
+      },
+      {
+        path: "/updateProduct",
+        element: <h1>Upload Product</h1>
       }
     ],
   },

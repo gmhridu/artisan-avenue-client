@@ -24,7 +24,7 @@ const UploadProduct = () => {
     fetchCategory();
   }, []);
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e) => {
     e.preventDefault();
     const formData = e.target;
     const name = formData.name.value;
@@ -44,30 +44,32 @@ const UploadProduct = () => {
       hoveredImg,
     };
 
-    axios
-      .post("http://localhost:5000/products", newProduct)
-      .then((response) => {
-        console.log(response);
-        const data = response?.data;
-        if (data?._id) {
-          Swal.fire({
-            title: "Success!",
-            text: "Product Added Successfully",
-            icon: "success",
-          });
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding Product:", error);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/products",
+        newProduct
+      );
+      console.log(response);
+      const data = response?.data;
+      if (data?._id) {
         Swal.fire({
-          title: "Error!",
-          text: "Failed to add Product",
-          icon: "error",
+          title: "Success!",
+          text: "Product Added Successfully",
+          icon: "success",
         });
-      });
-  };
 
+        setProducts([...products, data]);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error adding Product:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to add Product",
+        icon: "error",
+      });
+    }
+  };
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
