@@ -12,8 +12,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
@@ -26,7 +25,6 @@ const Navbar = () => {
       .get(`http://localhost:5000/users?email=${email}`)
       .then((response) => {
         const userInfo = response?.data;
-        console.log(userInfo);
         if (userInfo) {
           const currentUser = userInfo.find((user) => user.email === email);
           setUserData(currentUser);
@@ -41,7 +39,6 @@ const Navbar = () => {
       });
   };
 
-
   useEffect(() => {
     if (user) {
       fetchUserData(user?.email);
@@ -50,9 +47,6 @@ const Navbar = () => {
       setUserData(null);
     }
   }, [user]);
-
-
-
 
   const handleToggle = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "night" : "light"));
@@ -64,7 +58,7 @@ const Navbar = () => {
 
   // logOut
   const handleLogOut = () => {
-    setLoading(true); 
+    setLoading(true);
     logOut()
       .then(() => {
         Swal.fire({
@@ -82,6 +76,12 @@ const Navbar = () => {
           icon: "error",
         });
       });
+  };
+
+  // handleUpdate user 
+  const handleUpdateUser = () => {
+    navigate('/updateProfile')
+    setDropdownOpen(false);
   };
   return (
     <div className="my-2 mx-auto px-2">
@@ -125,6 +125,16 @@ const Navbar = () => {
                   Home
                 </NavLink>
                 <NavLink
+                  to={"/mylist"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  My List
+                </NavLink>
+                <NavLink
                   to={"/about"}
                   className={({ isActive }) =>
                     isActive
@@ -133,26 +143,6 @@ const Navbar = () => {
                   }
                 >
                   About
-                </NavLink>
-                <NavLink
-                  to={"/services"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-[#cfae7a] font font-medium text-base"
-                      : "font-medium leading-snug text-base"
-                  }
-                >
-                  Services
-                </NavLink>
-                <NavLink
-                  to={"/testimonials"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-[#cfae7a] font font-medium text-base"
-                      : "font-medium leading-snug text-base"
-                  }
-                >
-                  Testimonials
                 </NavLink>
                 <NavLink
                   to={"/contact"}
@@ -200,6 +190,17 @@ const Navbar = () => {
                 Home
               </NavLink>
               <NavLink
+                to={"/mylist"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#cfae7a] font font-medium text-base"
+                    : "font-medium leading-snug text-base"
+                }
+              >
+                My List
+              </NavLink>
+
+              <NavLink
                 to={"/about"}
                 className={({ isActive }) =>
                   isActive
@@ -209,26 +210,7 @@ const Navbar = () => {
               >
                 About
               </NavLink>
-              <NavLink
-                to={"/services"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#cfae7a] font font-medium text-base"
-                    : "font-medium leading-snug text-base"
-                }
-              >
-                Services
-              </NavLink>
-              <NavLink
-                to={"/testimonials"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#cfae7a] font font-medium text-base"
-                    : "font-medium leading-snug text-base"
-                }
-              >
-                Testimonials
-              </NavLink>
+
               <NavLink
                 to={"/contact"}
                 className={({ isActive }) =>
@@ -237,7 +219,7 @@ const Navbar = () => {
                     : "font-medium leading-snug text-base"
                 }
               >
-                Contact
+                Contact Us
               </NavLink>
             </div>
           </ul>
@@ -346,10 +328,13 @@ const Navbar = () => {
                       </span>
                     </div>
                     <li>
-                      <a className="justify-between pt-2">
-                        Profile
+                      <Link
+                        onClick={handleUpdateUser}
+                        to={'/updateProfile'}
+                        className="justify-between pt-2">
+                        Update Profile
                         <span className="badge">New</span>
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a>Settings</a>

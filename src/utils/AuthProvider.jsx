@@ -1,6 +1,6 @@
 
 import React, { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import auth from "../components/Firebase/firebase.config";
 import axios from "axios";
 
@@ -31,8 +31,30 @@ const AuthProvider = ({ children }) => {
 
   const signInUser = async (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
+    try {
+      const authResponse = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setUser(authResponse?.user);
+      setLoading(false);
+      return authResponse;
+    } catch (error) {
+      console.error("Error signing in user:", error);
+      setLoading(false);
+      throw error;
+    }
   }
+
+  const updateUserProfile = (displayName, image) => {
+    setLoading(true);
+    return updateProfile(auth.currentUser, {
+      displayName: displayName,
+      image: image,
+    });
+  };
+  
 
   const logOut = () => {
     setLoading(true)
@@ -55,6 +77,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     createUserAccount,
     signInUser,
+    updateUserProfile,
     logOut,
   };
 

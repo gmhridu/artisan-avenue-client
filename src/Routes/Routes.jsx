@@ -6,6 +6,10 @@ import UploadProduct from "../pages/UploadProduct/UploadProduct";
 import axios from "axios";
 import SignIn from "../pages/SignIn/SignIn";
 import Register from "../pages/Register/Register";
+import About from "../pages/About/About";
+import MyList from "../pages/MyList/MyList";
+import ContactUs from "../pages/ContactUs/ContactUs";
+import UpdateProfile from "../components/UpdateProfile/UpdateProfile";
 
 
 const router = createBrowserRouter([
@@ -29,15 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <h1>About</h1>,
-      },
-      {
-        path: "/services",
-        element: <h1>Services</h1>,
-      },
-      {
-        path: "/contact",
-        element: <h1>Contact</h1>,
+        element: <About/>,
       },
       {
         path: "/singleProduct/:id",
@@ -56,6 +52,14 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: "/mylist",
+        element: <MyList/>,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+      {
         path: "/uploadProduct",
         element: <UploadProduct />,
       },
@@ -68,7 +72,8 @@ const router = createBrowserRouter([
         element: <Register/>,
       },
       {
-        
+        path: "/updateProfile",
+        element: <UpdateProfile/>,
       }
     ],
   },

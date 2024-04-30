@@ -98,7 +98,7 @@ const NewProductsSlider = () => {
               <>
                 <div
                   className="absolute flex flex-col 
-              gap-3 bottom-44 left-1 items-center md:bottom-56 md:right-32 z-20"
+              gap-3 bottom-44 right-10 items-center md:bottom-56 md:right-32  z-20"
                 >
                   <NavLink
                     to={`singleProduct/${craft?._id}`}
@@ -113,7 +113,7 @@ const NewProductsSlider = () => {
                     <FaCartArrowDown className="text-2xl md:text-3xl text-center" />
                   </NavLink>
                 </div>
-                <div className="absolute top-16 left-2 md:top-[4.8rem] md:right-[6.5rem] bg-green-500 p-2 rounded-lg">
+                <div className="absolute top-16 right-8 md:top-[4.8rem] md:right-[6.5rem] bg-green-500 p-2 rounded-lg">
                   <div className="rating">
                     <h3 className="text-lg text-white mr-2">{craft?.rating}</h3>
                     <input
