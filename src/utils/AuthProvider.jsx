@@ -31,42 +31,19 @@ const AuthProvider = ({ children }) => {
 
   const signInUser = async (email, password) => {
     setLoading(true);
-    try {
-      const authResponse = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      setUser(authResponse?.user);
-      setLoading(false);
-      return authResponse;
-    } catch (error) {
-      console.error("Error signing in user:", error);
-      setLoading(false);
-      throw error;
-    }
+    return signInWithEmailAndPassword(auth, email, password)
   }
 
   const logOut = () => {
-    setLoading(true);
-    try {
-      signOut(auth);
-      setUser(null);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error signing out user:", error);
-      setLoading(false);
-      throw error;
-    }
+    setLoading(true)
+    return signOut(auth)
+    
   }
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      setUser(currentUser);
-    } else {
-      setUser(null);
-    }
+      console.log(currentUser)
+      setUser(currentUser)
     })
     return () => unSubscribe();
 },[])

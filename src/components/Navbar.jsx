@@ -21,25 +21,38 @@ const Navbar = () => {
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
 
-  useEffect(() => {
-    if (user) {
-      fetchUserData(user?.uid);
-    } else {
-      console.error("Error fetching user data");
-    }
-  }, [user]);
-
-  const fetchUserData = (uid) => {
+  const fetchUserData = (email) => {
     axios
-      .get(`http://localhost:5000/users?uid=${uid}`)
+      .get(`http://localhost:5000/users?email=${email}`)
       .then((response) => {
-        const { name, email, image } = response?.data[0];
-        setUserData({ name, email, image });
+        const userInfo = response?.data;
+        console.log(userInfo);
+        if (userInfo) {
+          const currentUser = userInfo.find((user) => user.email === email);
+          setUserData(currentUser);
+        } else {
+          console.error("User data not found for email:", email);
+          setUserData(null);
+        }
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
+        setUserData(null);
       });
   };
+
+
+  useEffect(() => {
+    if (user) {
+      fetchUserData(user?.email);
+    } else {
+      console.error("Error fetching user data");
+      setUserData(null);
+    }
+  }, [user]);
+
+
+
 
   const handleToggle = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "night" : "light"));
@@ -101,23 +114,56 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Parent</a>
-                  <ul className="p-2">
-                    <li>
-                      <a>Submenu 1</a>
-                    </li>
-                    <li>
-                      <a>Submenu 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a>Item 3</a>
-                </li>
+                <NavLink
+                  to={"/"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  to={"/about"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  About
+                </NavLink>
+                <NavLink
+                  to={"/services"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  Services
+                </NavLink>
+                <NavLink
+                  to={"/testimonials"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  Testimonials
+                </NavLink>
+                <NavLink
+                  to={"/contact"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-[#cfae7a] font font-medium text-base"
+                      : "font-medium leading-snug text-base"
+                  }
+                >
+                  Contact
+                </NavLink>
               </ul>
             )}
           </div>

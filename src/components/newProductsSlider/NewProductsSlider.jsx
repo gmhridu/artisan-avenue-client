@@ -52,7 +52,7 @@ const NewProductsSlider = () => {
   };
 
   return (
-    <div className="w-full cursor-pointer">
+    <div className="w-full cursor-pointer px-1 md:px-0">
       <Carousel
         className="z-20"
         responsive={responsive}
@@ -79,41 +79,41 @@ const NewProductsSlider = () => {
             key={craft?._id}
           >
             <div
-              className="h-[600px] w-[450px]"
+              className="h-[300px] w-[190px] md:h-[600px] md:w-[450px]"
               onMouseOver={(e) => handleMouseEnter(e, index)}
               onMouseOut={(e) => handleMouseLeave(e, index)}
             >
               <img
-                className={`rounded-xl w-full h-full object-cover bg-white p-2 border-2 md:p-4 md:border-[15px] border-[#121212] transition-all duration-300
+                className={`rounded-xl w-full h-full object-container bg-white p-2 border-2 md:p-4 md:border-[15px] border-[#121212] transition-all duration-300
               `}
                 src={hoveredImages[index] ? craft?.hoveredImg : craft?.image}
                 alt="pic"
               />
             </div>
             <div className="my-5">
-              <h1 className="text-lg">{craft?.name}</h1>
+              <h1 className="md:text-lg">{craft?.name}</h1>
               <p>$ {craft?.price}</p>
             </div>
             {newCraft[index]?.hoveredImg && (
               <>
                 <div
-                  className="absolute  flex flex-col 
-              gap-3 bottom-56 right-32 z-20"
+                  className="absolute flex flex-col 
+              gap-3 bottom-44 left-1 items-center md:bottom-56 md:right-32 z-20"
                 >
                   <NavLink
                     to={`singleProduct/${craft?._id}`}
                     className="text-black p-2 bg-white rounded-xl"
                   >
-                    <FaRegEye className="text-3xl" />
+                    <FaRegEye className="text-2xl md:text-3xl text-center" />
                   </NavLink>
                   <NavLink
                     to={`singleProduct/${craft?._id}`}
                     className="text-black p-2 bg-white rounded-xl"
                   >
-                    <FaCartArrowDown className="text-3xl" />
+                    <FaCartArrowDown className="text-2xl md:text-3xl text-center" />
                   </NavLink>
                 </div>
-                <div className="absolute top-[4.8rem] right-[6.5rem] bg-green-500 p-2 rounded-lg">
+                <div className="absolute top-16 left-2 md:top-[4.8rem] md:right-[6.5rem] bg-green-500 p-2 rounded-lg">
                   <div className="rating">
                     <h3 className="text-lg text-white mr-2">{craft?.rating}</h3>
                     <input
